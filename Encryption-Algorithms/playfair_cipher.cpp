@@ -41,8 +41,7 @@ vector<string>divide_into_pairs(string plain_text){
         if(temp.size() == 2){
             if(temp[1] == temp[0]){
                 temp.pop_back();
-                temp.push_back('x');
-                res.push_back(temp);
+                res.push_back(temp + "x");
                 temp = temp[0];
             }
             else{
@@ -109,12 +108,6 @@ string playfair_cipher(string plain_text,string key){
             }
         }
     }
-    for(int i = 0 ; i < 5 ; i++){
-        for(int j = 0 ; j < 5 ; j++){
-            cout << playfair_matrix[i][j] << " ";
-        }
-        cout << "\n";
-    }
     vector<string>pairs = divide_into_pairs(plain_text);
     string res = "";
     for(auto i : pairs){
@@ -126,6 +119,14 @@ string playfair_cipher(string plain_text,string key){
 
 int main(){
     string res = playfair_cipher("cheese","monarchy");
+    cout << "PLAYFAIR MATRIX" << endl;
+    for(int i = 0 ; i < 5 ; i++){
+        for(int j = 0 ; j < 5 ; j++){
+            cout << playfair_matrix[i][j] << " ";
+        }
+        cout << "\n";
+    }
+    cout << "CIPHER TEXT :" << endl;
     cout << res << endl;
     return 0;
 }
