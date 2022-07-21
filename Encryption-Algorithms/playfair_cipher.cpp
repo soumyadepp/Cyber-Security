@@ -42,9 +42,13 @@ vector<string>divide_into_pairs(string plain_text){
             if(temp[1] == temp[0]){
                 temp.pop_back();
                 temp.push_back('x');
+                res.push_back(temp);
+                temp = temp[0];
             }
-            res.push_back(temp);
-            temp = "";
+            else{
+                res.push_back(temp);
+                temp = "";
+            }
         }
         temp += plain_text[i];
     }
@@ -121,7 +125,7 @@ string playfair_cipher(string plain_text,string key){
 }
 
 int main(){
-    string res = playfair_cipher("rahul","monarchy");
+    string res = playfair_cipher("cheese","monarchy");
     cout << res << endl;
     return 0;
 }
