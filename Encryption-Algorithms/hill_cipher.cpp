@@ -8,11 +8,7 @@ vector<vector<int>>matrix_multiplication_mod26(vector<vector<int>>mat1,vector<ve
             for(int k = 0 ; k < mat1[0].size(); k++){
                 ans[i][j] += mat1[i][k] * mat2[k][j];
             }
-        }
-    }
-    for(auto &i : ans){
-        for(auto &j : i){
-            j = j % 26;
+            ans[i][j] %= 26;
         }
     }
     return ans;
