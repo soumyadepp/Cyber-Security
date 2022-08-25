@@ -55,6 +55,14 @@ class SDESAlgorithm{
     unordered_map<int,string>bin_map;
     public:
     SDESAlgorithm(string plainText,string keyString){
+        if(plainText.size() != 8){
+            cout << "Invalid plain text size" << endl;
+            exit(-1);
+        }
+        if(keyString.size() != 10){
+            cout << "Invalid key size" << endl;
+            exit(-1);
+        }
         this -> messageString = plainText;
         keygen.setKeyString(keyString);
         keygen.setP10(p10);
@@ -88,10 +96,18 @@ class SDESAlgorithm{
         this -> s1 = s1;
     }
     string expand(string pt){
+        if(ep.size() != 8){
+            cout << "Invalid EP" << endl;
+            exit(-1);
+        }
         string res = permute(pt,ep);
         return res;
     }
     string compress(string expanded){
+        if(s0.size() != 4 || s1.size() != 4){
+            cout << "Invalid s0 or s1" << endl;
+            exit(-1);
+        }
         string firstHalf = expanded.substr(0,4);
         string secondHalf = expanded.substr(4);
         string idx1 = "",idx2 = "";
@@ -109,6 +125,10 @@ class SDESAlgorithm{
         return res;
     }
     string encrypt(){
+        if(ip.size() != 8) {
+            cout << "Invalid IP" << endl;
+            exit(-1);
+        }
         string ipString = permute(messageString,ip);
         string firstHalf = ipString.substr(0,4);
         string secondHalf = ipString.substr(4);
@@ -122,6 +142,10 @@ class SDESAlgorithm{
         firstHalf = xorString(firstHalf,res2);
         string k = firstHalf + secondHalf;
         
+        if(ip_inv.size() != 8){
+            cout << "Invalid IP Inverse"<<endl;
+            exit(-1);
+        }
         return permute(k,ip_inv);
     }
 };
